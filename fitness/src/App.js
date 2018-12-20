@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Paper, Typography, TextField, Button } from '@material-ui/core'
-import { List, ListItem, ListItemText } from '@material-ui/core'
+import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import { Delete } from '@material-ui/icons'
 
-class App extends Component {
+const styles = {
+ root: {
+  margin: 20,
+  padding: 20,
+  maxWidth: 400
+ }
+}
+
+export default withStyles(styles)(
+ class App extends Component {
  state = {
-  exercises: [],
+  exercises: [
+   {id: 1, title: 'Bench Press'},
+   {id: 2, title: 'Deadlift'},
+   {id: 3, title: 'Squats'}
+  ],
   title: ''
  }
- 
+
  handleChange = (event) => {
   this.setState({
    [event.target.name]: event.target.value
@@ -31,10 +46,17 @@ class App extends Component {
   ))
  }
  }
+
+ handleDelete = (id) => {
+  this.setState(({exercises}) => ({
+   exercises: exercises.filter(ex => ex.id !== id)
+  }))
+ }
   render() {
    const { title, exercises } = this.state
+   const { classes } = this.props
     return (
-     <Paper>
+     <Paper className={classes.root}>
       <Typography
        variant='display1'
        align='center'
@@ -45,7 +67,7 @@ class App extends Component {
       <form onSubmit={this.handleAdd}>
       <TextField
       name="title"
-      label="exercise"
+      label="Add an exercises"
       value={title}
       onChange={this.handleChange}
       margin='normal'
@@ -55,18 +77,25 @@ class App extends Component {
       color="primary"
       variant="raised"
       >
-       Add an excercise.
+       Commit to it.
       </Button>
       <List>
        {exercises.map(({id, title}) => <ListItem key={id}>
         
         <ListItemText primary={title}/>
+        <ListItemSecondaryAction>
+         <IconButton
+          color="primary"
+          onClick={() => this.handleDelete(id)}
+         >
+          <Delete/>
+         </IconButton>
+        </ListItemSecondaryAction>
        </ListItem>)}
       </List>
       </form>
      </Paper>
     );
   }
-}
+})
 
-export default App;
