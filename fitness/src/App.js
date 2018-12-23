@@ -9,15 +9,39 @@ const styles = {
  root: {
   margin: 20,
   padding: 20,
-  maxWidth: 800,
   display: 'flex',
   justifyContent: 'center',
-  background: '#bdbdbd'
+  background: '#bdbdbd',
+  border: '1px solid black'
 
  },
  delete: {
-  marginRight: 15
+  marginRight: 200
  },
+ form: {
+  display: 'flex',
+  alignItems: 'baseline',
+  flexDirection: 'row',
+  justifyContent: 'space-around',
+  width: '100%' 
+ },
+ list: {
+  maxWidth: '100%',
+  marginLeft: 40
+ },
+ section: {
+  display: 'flex',
+  flexDirection: 'column'
+ },
+ badge: {
+  marginLeft: 50,
+  marginTop: 17
+  // marginBottom: 125
+ },
+ buttonBadge: {
+  display: 'flex',
+  flexDirection: 'row',
+ }
 }
 
 export default withStyles(styles)(
@@ -71,8 +95,10 @@ export default withStyles(styles)(
       >
        Exercises
       </Typography>
-      
-      <form onSubmit={this.handleAdd}>
+       
+      <form onSubmit={this.handleAdd} className={classes.form}>
+      <section className={classes.section}>
+     
       <TextField
       name="title"
       label="Add an exercise..."
@@ -80,23 +106,28 @@ export default withStyles(styles)(
       onChange={this.handleChange}
       margin='normal'
       />
-      <Badge
-      className={classes.delete}
-       color='primary'
-       badgeContent={this.state.exercises.length}
-      />
+      <div className={classes.buttonBadge}>
       <Button
       type="submit"
       color="#bdbdbd"
       variant="raised"
       >
        Commit to it.
-      </Button>   
+      </Button>
+      <Badge
+      // className={classes.delete}
+       color='primary'
+       badgeContent={this.state.exercises.length}
+       className={classes.badge}
+      />  
+      </div>
+      </section>
+       
       
-      <List>
+      <List  className={classes.list}>
        {exercises.map(({id, title}) => <ListItem key={id}>
         
-        <ListItemText primary={title}/>
+        <ListItemText primary={title} style={{marginRight: 45}}/>
         <ListItemSecondaryAction>
          <Chip
           color="primary"
