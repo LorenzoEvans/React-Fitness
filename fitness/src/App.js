@@ -47,7 +47,7 @@ const styles = {
  AppFlexColumn: {
   display: 'flex',
   flexDirection: 'column',
-  border: '1px solid black'
+  // border: '1px solid black'
  },
  innerPaper: {
   width: 200,
@@ -64,7 +64,9 @@ export default withStyles(styles)(
    {id: 2, title: 'Deadlift'},
    {id: 3, title: 'Squats'}
   ],
-  title: ''
+  title: '',
+  habits: [{habit: "Stay away from processed foods."}],
+  habit: ''
  }
 
  handleChange = (event) => {
@@ -90,13 +92,34 @@ export default withStyles(styles)(
  }
  }
 
+ habitChange = event => {
+  this.setState({
+   [event.target.name]: event.target.value
+  })
+ }
+
+ handleHabit = event => {
+  event.preventDefault()
+  if (this.state.habit){
+   this.setState((habits, habit) => ({
+    exercises: [...habits,
+     {
+      habit,
+      id: Date.now()
+     }
+    ],
+    habit: ''
+   }))
+  }
+ }
+
  handleDelete = (id) => {
   this.setState(({exercises}) => ({
    exercises: exercises.filter(ex => ex.id !== id)
   }))
  }
   render() {
-   const { title, exercises } = this.state
+   const { title, exercises, habit, habits } = this.state
    const { classes } = this.props
     return (
      <Paper className={classes.root}>
@@ -104,15 +127,18 @@ export default withStyles(styles)(
      <Paper className={classes.innerPaper}>
        Healthy Eating
        <Divider/>
-       <Tab label={"Stay away from processed sugar."} />
-       <Tab label={"Purchase whole grain wheat bread instead of white bread."}/>
+       
+       <form onSubmit={this.handleAdd} >
        <TextField
-      name="title"
+      name="habit"
       label="Add a eating habit..."
-      value={title}
-      onChange={this.handleChange}
+      value={habit}
+      onChange={this.habitChange}
       margin='normal'
       />
+      </form>
+      {habits.map((habit) => <Tab label={habit.habit} />
+      )}
       </Paper>
      <div className={classes.AppFlexColumn}>
       <Typography
