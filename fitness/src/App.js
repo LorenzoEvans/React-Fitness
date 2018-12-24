@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Paper, Typography, TextField, Button, Badge } from '@material-ui/core'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, Chip } from '@material-ui/core'
+import { Divider } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Delete } from '@material-ui/icons'
 
@@ -9,6 +10,7 @@ const styles = {
  root: {
   margin: 20,
   padding: 20,
+  height: 400,
   display: 'flex',
   justifyContent: 'center',
   background: '#bdbdbd',
@@ -41,6 +43,16 @@ const styles = {
  buttonBadge: {
   display: 'flex',
   flexDirection: 'row',
+ },
+ AppFlexColumn: {
+  display: 'flex',
+  flexDirection: 'column',
+  border: '1px solid black'
+ },
+ innerPaper: {
+  width: 200,
+  background: '#4e2884',
+  marginRight: 45
  }
 }
 
@@ -88,6 +100,12 @@ export default withStyles(styles)(
    const { classes } = this.props
     return (
      <Paper className={classes.root}>
+     <Paper className={classes.innerPaper}>
+       Hey
+       <Divider/>
+       hello
+      </Paper>
+     <div className={classes.AppFlexColumn}>
       <Typography
        variant='display1'
        align='center'
@@ -142,7 +160,10 @@ export default withStyles(styles)(
        </ListItem>)}
       </List>
       </form>
+      </div>
+      
      </Paper>
+     
     );
   }
 })
