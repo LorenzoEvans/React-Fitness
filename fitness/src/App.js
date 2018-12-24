@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Paper, Typography, TextField, Button, Badge } from '@material-ui/core'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, Chip } from '@material-ui/core'
-import { Divider } from '@material-ui/core'
+import { Divider, Tab } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Delete } from '@material-ui/icons'
 
@@ -100,10 +100,19 @@ export default withStyles(styles)(
    const { classes } = this.props
     return (
      <Paper className={classes.root}>
+     
      <Paper className={classes.innerPaper}>
-       Hey
+       Healthy Eating
        <Divider/>
-       hello
+       <Tab label={"Stay away from processed sugar."} />
+       <Tab label={"Purchase whole grain wheat bread instead of white bread."}/>
+       <TextField
+      name="title"
+      label="Add a eating habit..."
+      value={title}
+      onChange={this.handleChange}
+      margin='normal'
+      />
       </Paper>
      <div className={classes.AppFlexColumn}>
       <Typography
