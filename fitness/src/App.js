@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from './components/header/header'
 import { Paper, Typography, TextField, Button, Badge } from '@material-ui/core'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, Chip } from '@material-ui/core'
 import { Divider, Tab } from '@material-ui/core'
@@ -8,13 +9,14 @@ import { Delete } from '@material-ui/icons'
 
 const styles = {
  root: {
-  margin: 20,
-  padding: 20,
-  height: 400,
+  // margin: 20,
+  // padding: 20,
+  height: 800,
+  width: '100%',
   display: 'flex',
+  background: "#263238",
   justifyContent: 'center',
-  background: '#bdbdbd',
-  border: '1px solid black'
+  // border: '1px solid black'
 
  },
  delete: {
@@ -38,7 +40,6 @@ const styles = {
  badge: {
   marginLeft: 50,
   marginTop: 17
-  // marginBottom: 125
  },
  buttonBadge: {
   display: 'flex',
@@ -51,7 +52,7 @@ const styles = {
  },
  innerPaper: {
   width: 200,
-  background: '#4e2884',
+  background: '#9E9E9E',
   marginRight: 45
  }
 }
@@ -122,9 +123,10 @@ export default withStyles(styles)(
    const { title, exercises, habit, habits } = this.state
    const { classes } = this.props
     return (
+     <>
+     <Header/>
      <Paper className={classes.root}>
-     
-     <Paper className={classes.innerPaper}>
+     <Paper className={classes.innerPaper} color="primary">
        Healthy Eating
        <Divider/>
        
@@ -198,7 +200,7 @@ export default withStyles(styles)(
       </div>
       
      </Paper>
-     
+     </>
     );
   }
 })

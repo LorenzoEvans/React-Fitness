@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/fitness/node_modules
 /.pnp
 .pnp.js
 
